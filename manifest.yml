@@ -1,0 +1,15 @@
+modules:
+  confluence:globalSettings:
+    - key: helloworld-hello-world-content-byline-item
+      resource: main
+      resolver:
+        function: resolver
+      title: helloworld
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: static/hello-world/build
+app:
+  id: ari:cloud:ecosystem::app/55052d31-4b6e-46bf-bf33-c6de5049b626
