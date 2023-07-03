@@ -3,7 +3,9 @@ import Resolver from '@forge/resolver';
 const resolver = new Resolver();
 
 resolver.define('getText', (req) => {
-  console.log(req);
+
+  const {data} = req.payload
+  console.log(data);
 
   return 'welcome';
   
