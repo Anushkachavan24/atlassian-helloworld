@@ -43,10 +43,3 @@ const Radiobuttons = () => {
 }
 
 export default Radiobuttons
-
-
-  //   <div id='thirdform' className='thirdform'>
-  //     <button id='thirdbutton' className="button">Test your connection</button>
-  //   </div>
-  // </div></div >
-

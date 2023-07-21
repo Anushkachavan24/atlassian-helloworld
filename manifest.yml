@@ -13,3 +13,18 @@ resources:
     path: static/hello-world/build
 app:
   id: ari:cloud:ecosystem::app/55052d31-4b6e-46bf-bf33-c6de5049b626
+permissions:
+  scopes:
+    - storage:app
+    - write:confluence-content
+  external:
+    fetch:
+      backend:
+        - 'https://login.microsoft.com'
+        - 'https://graph.microsoft.com'
+  # external:
+  #   fetch:
+  #       key: external-api
+  #       function: /api/external
+  #       include:
+  #        - "https://login.microsoft.com"
