@@ -1,7 +1,5 @@
 import Resolver from '@forge/resolver';
 import { storage, fetch } from '@forge/api';
-import { invoke } from '@forge/bridge';
-// const { http } = require("@forge/bridge");
 
 const resolver = new Resolver();
 
@@ -505,4 +503,19 @@ resolver.define('getcolumnname', async (req) => {
     return response
 })
 
+export const macroHandler = async () => {
+    return {
+      result: {
+        type: 'json',
+        value: {
+          name: 'My Macro',
+          key: 'my-macro',
+          description: 'A custom macro that displays a file and adds it to the page.',
+        },
+      },
+    };
+  };
+  
+
 export const handler = resolver.getDefinitions();
+

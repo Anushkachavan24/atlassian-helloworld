@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from 'react';
+import '../App.css'
 import { invoke } from '@forge/bridge';
 import folder from '../images/folder.png';
 import Item from "./item";
@@ -23,7 +24,7 @@ const List = ({ listId, siteId }) => {
     }, [])
 
     const getitems = async (item) => {
-        console.log(item.id )
+        console.log(item.id)
         console.log(item.parentReference.id)
         console.log(item.parentReference.siteId)
 
@@ -38,26 +39,30 @@ const List = ({ listId, siteId }) => {
     return (
         <div>
             {
-                info ? (<Listitem itemid={items.id} listid= {listId} siteid={items.parentReference.siteId.split(',')[1]}/>) :
-            
+                info ? (<Listitem itemid={items.id} listid={listId} siteid={items.parentReference.siteId.split(',')[1]} />) :
+
                     (siteId === "root" && back) ? (<Page1 />) :
                         (back && siteId !== "root") ? (<Site siteId={siteId} />) :
                             (
-                                < div >
-                                    <button onClick={handleGoBack}>Go Back</button>
-                                    <table>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Created At</th>
-                                            <th>Last Modified At</th>
-                                        </tr>
-                                        {listinfo.map((list) => (
-                                            (<tr>
-                                                <th>{<button onClick={() => getitems(list)} value={list.id}> {list.id}</button>}</th>
-                                                <th>{list.createdDateTime}</th>
-                                                <th>{list.lastModifiedDateTime}</th>
-                                            </tr>)
-                                        ))}
+                                < div style={{ marginTop: "10px", height: '435px', overflow: 'scroll' }}>
+                                    <button className="button-allsites" onClick={handleGoBack}>Go Back</button>
+                                    <table className="styled-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Created At</th>
+                                                <th>Last Modified At</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {listinfo.map((list) => (
+                                                (<tr>
+                                                    <th>{<button className="clickbutton" onClick={() => getitems(list)} value={list.id}> {list.id}</button>}</th>
+                                                    <th>{list.createdDateTime}</th>
+                                                    <th>{list.lastModifiedDateTime}</th>
+                                                </tr>)
+                                            ))}
+                                        </tbody>
                                     </table>
                                 </div>
                             )

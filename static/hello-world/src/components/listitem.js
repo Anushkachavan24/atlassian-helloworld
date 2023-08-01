@@ -10,29 +10,28 @@ import List from "./list"
 
 const Listitem = ({ itemid, listid, siteid }) => {
     const [iteminfo, setItemInfo] = useState([])
-    // const [info, setInfo] = useState(false)
+    const [info, setInfo] = useState('')
     // const [items, setitems] = useState('')
-    const [column, setcolumn] = useState('')
+    const [column, setcolumn] = useState([])
     const [back, setback] = useState(false)
+    let column1 = []
 
     useEffect(() => {
         const getinfo = async () => {
             const data = await invoke('getlistById', { id: itemid, listid: listid, siteid: siteid })
-            const columndata = await invoke('getcolumnname', {listid: listid, siteid: siteid})
+            const columndata = await invoke('getcolumnname', { listid: listid, siteid: siteid })
             setcolumn(columndata)
             setItemInfo(data)
-            
-            
-            console.log(columndata[0])
+            for (let i = 0; i < columndata.length; i++) {
+                column1.push(columndata[i])
+            }
+            console.log(column1)
+            console.log(columndata)
+            setInfo(data.fields)
+            console.log(data.fields)
         }
         getinfo()
     }, [])
-
-    // const getitems = async (item) => {
-    //     console.log(item)
-    //     setitems(item)
-    //     setInfo(true)
-    // }
 
     const handleGoBack = () => {
         setback(true)
@@ -46,18 +45,29 @@ const Listitem = ({ itemid, listid, siteid }) => {
                 //     (back && siteId !== "root") ? (<List listId={listId} siteId={siteId} />) :
 
                 < div >
-                    <button onClick={handleGoBack}>Go Back</button>
+                    <button className="button-allsites" onClick={handleGoBack}>Go Back</button>
                     <table>
                         <tr>
                             <th>Name</th>
                             <th>Created At</th>
                             <th>Last Modified At</th>
                         </tr>
-                        <tr>
-                            <th>{column.name}</th>
-                            <th>{iteminfo.lastModifiedDateTime}</th> 
+                        {/* {column1[0]} */}
+                        {/* {column1[0].name} */}
+
+                        {column.map((columninfo) => (
+                            <tr>
+                                <p key={columninfo.id}>{columninfo.displayName}</p>
+                            </tr>
+                        ))}
+                        {/* {column} */}
+                        {info.map((i) => (
+                            <tr>
+                            <p key={i}>{i}</p>
                         </tr>
+                        ))}
                     </table>
+                    <p>{info.Title}</p>
                 </div>
 
             }

@@ -22,15 +22,12 @@ function App() {
 
   return (
     <>
-      <Navbar />
       <div className="container">
         <Sidemenu />
         {
           // !isSubmitted ? (<Integrate />) : (<Thirdform />)
           !isSubmitted ? (<Integrate />) : (<Page1 />)
-          
         }
-
       </div>
     </>
   );

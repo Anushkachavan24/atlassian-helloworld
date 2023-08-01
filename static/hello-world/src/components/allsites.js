@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from 'react';
 import { invoke } from '@forge/bridge';
 import Site from './site'
+import '../App.css'
 
 const Allsites = () => {
     const [showsites, setShowsites] = useState([])
@@ -28,20 +29,25 @@ const Allsites = () => {
     return (
         <div>
             {
-                info ? <Site siteId={siteid} /> : <div style={{ display: 'flex' }}>
-                    <table>
+                info ? <Site siteId={siteid} /> : 
+                <div style={{ marginTop: "10px", height: '435px', overflow: 'scroll', display: 'flex'}} >
+                    <table className="styled-table">
+                        <thead>
                         <tr>
                             <th>Name</th>
                             <th>Created At</th>
                             <th>Last Modified At</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         {showsites.map((site) => (
                             <tr>
-                                <th>{<button onClick={() => getsite(site)} value={site.id.split(',')[1]}> {site.name}</button>}</th>
+                                <th>{<button className="clickbutton" onClick={() => getsite(site)} value={site.id.split(',')[1]}> {site.name}</button>}</th>
                                 <th>{site.createdDateTime}</th>
                                 <th>{site.lastModifiedDateTime}</th>
                             </tr>
                         ))}
+                        </tbody>
                     </table>
                 </div>
             }

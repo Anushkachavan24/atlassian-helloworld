@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { invoke } from '@forge/bridge';
 import Allsites from "./allsites";
 import Drive from "./drive";
+import '../App.css'
 
 export default function Page1() {
   const [rootsite, setrootsite] = useState('')
@@ -78,108 +79,109 @@ export default function Page1() {
   }
 
   return (
-    <div style={{ overflow: 'auto' }}>
-
+    <div >
       {
-
         info ? <Drive driveId={driveid} siteId="root" /> :
           sites ? (<Allsites />) :
-            (!sites && rootsite) && (
-              <div>
-                <button onClick={getsite}>All Sites</button>
-                <div>
+            (!sites && rootsite) ? (
+              <div style={{ marginTop: "10px", height: '435px', overflow: 'scroll' }}>
+                <button className="button-allsites" onClick={getsite}>All Sites</button>
+                <div className="siteinfo">
                   <h3>{rootsite.displayName}</h3>
-                  <h4>Discription: {rootsite.description}</h4>
-                  <h4>Created At: {rootsite.createdDateTime}</h4>
-                  <h4>Last Modified At: {rootsite.lastModifiedDateTime}</h4>
+                  <h5>Discription: {rootsite.description}</h5>
+                  <h5>Created At: {rootsite.createdDateTime}</h5>
+                  <h5>Last Modified At: {rootsite.lastModifiedDateTime}</h5>
                 </div>
                 <br /><br />
                 <div>
-                ({subsites === []}) ? (<div>"NO result"</div>):(
                   <h2>Sub-sites</h2>
-                  
-                  <div style={{ display: 'flex' }}>
-                    <table>
-                      <tr>
-                        <th>Name</th>
-                        <th>Created At</th>
-                        <th>Last Modified At</th>
-                      </tr>
-                      {subsites.map((subsite) => (
-
-                        <tr>
-                          <th>{<button onClick={() => getsite(subsite.id.split(',')[1])} value={subsite.id.split(',')[1]}> {subsite.name}</button>}</th>
-                          <th>{subsite.createdDateTime}</th>
-                          <th>{subsite.lastModifiedDateTime}</th>
-                        </tr>
-
-                        // <button onClick={() => getsite(subsite.id)} value={subsite.id}>{subsite.name}</button>
-                      ))}
-                    </table>
-                  </div>
-                  <br />
+                  {subsites.length === 0 ? <div>No subsites</div> :
+                    <>
+                      <div style={{ display: 'flex' }}>
+                        <table>
+                          <tr>
+                            <th>Name</th>
+                            <th>Created At</th>
+                            <th>Last Modified At</th>
+                          </tr>
+                          {subsites.map((subsite) => (
+                            <tr>
+                              <th>{<button className="clickbutton" onClick={() => getsite(subsite.id.split(',')[1])} value={subsite.id.split(',')[1]}> {subsite.name}</button>}</th>
+                              <th><h5>{subsite.createdDateTime}</h5></th>
+                              <th>{subsite.lastModifiedDateTime}</th>
+                            </tr>
+                          ))}
+                        </table>
+                      </div>
+                      <br />
+                    </>
+                  }
                 </div>
-                )
                 <br /><br />
                 <div>
                   <h2>Drives</h2>
-                  <div style={{ display: 'flex' }}>
-                    <table class="styled-table">
-                      <thead>
-                        <tr>
-                          <th>Name</th>
-                          <th>Created At</th>
-                          <th>Last Modified At</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {drives.map((drive) => (
-
+                  {drives.length === 0 ? <div>No drives</div> : <>
+                    <div style={{ display: 'flex' }}>
+                      <table className="styled-table">
+                        <thead>
                           <tr>
-                            <th>{<button onClick={() => getdriveinfo(drive.id)} value={drive.id}> {drive.name}</button>}</th>
-                            <th>{drive.createdDateTime}</th>
-                            <th>{drive.lastModifiedDateTime}</th>
+                            <th>Name</th>
+                            <th>Created At</th>
+                            <th>Last Modified At</th>
                           </tr>
-
-                          // <button onClick={() => getsite(drive.id)} value={drive.id}>{drive.name}</button>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                        </thead>
+                        <tbody>
+                          {drives.map((drive) => (
+                            <tr>
+                              <th>{<button className="clickbutton" onClick={() => getdriveinfo(drive.id)} value={drive.id}> {drive.name}</button>}</th>
+                              <th><h5>{drive.createdDateTime}</h5></th>
+                              <th>{drive.lastModifiedDateTime}</th>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </>}
                   <br />
                 </div>
                 <div>
                   <h2>Lists</h2>
-                  <div style={{ display: 'flex' }}>
-                    <table>
-                      <tr>
-                        <th>Name</th>
-                        <th>Created At</th>
-                        <th>Last Modified At</th>
-                      </tr>
-                      {lists.map((list) => (
-                        <tr>
-                          <th>{<button onClick={() => getsite(list.id)} value={list.id}> {list.name}</button>}</th>
-                          <th>{list.createdDateTime}</th>
-                          <th>{list.lastModifiedDateTime}</th>
-                        </tr>
-                        // <button onClick={() => getsite(list.id)} value={list.id}>{list.name}</button>
-                      ))}
-                    </table>
-                  </div>
+                  {lists.length === 0 ? <div>No lists</div> : <>
+                    <div style={{ display: 'flex' }}>
+                      <table className="styled-table">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Created At</th>
+                            <th>Last Modified At</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {lists.map((list) => (
+                            <tr>
+                              <th>{<button className="clickbutton" onClick={() => getsite(list.id)} value={list.id}> {list.name}</button>}</th>
+                              <th><h5>{list.createdDateTime}</h5></th>
+                              <th>{list.lastModifiedDateTime}</th>
+                            </tr>
+                            // <button onClick={() => getsite(list.id)} value={list.id}>{list.name}</button>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </>}
                   <br />
                 </div>
               </div>
 
+            ) : (Errormessage &&
+              <div>
+                <div class="message error">
+                  <div class="text">{Errormessage}</div>
+                </div>
+              </div>
             )
       }
-      {Errormessage &&
-        <div>
-          <div class="message error">
-            <div class="text">{Errormessage}</div>
-          </div>
-        </div>
-      }
+
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import { invoke } from '@forge/bridge';
+import '../App.css'
 import Item from "./item";
 import folder from '../images/folder.png';
 import png from '../images/png.png'
@@ -52,53 +53,57 @@ const Folder = ({ parentid, itemId, driveId }) => {
                     back ? (<Item parentid={iteminfo[0].parentReference.driveId} itemId={parentid} driveid={iteminfo[0].parentReference.driveId} parent="folder" />) :
                         (
                             <div>
-                                <button onClick={handleGoBack}>Go Back</button>
-                                <table>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Created At</th>
-                                        <th>Last Modified At</th>
-                                    </tr>
-                                    {iteminfo.map((item) => (
-                                        (item['@microsoft.graph.downloadUrl']) ?
-                                            (<tr>
-                                                <th>{
-                                                    item.name.split('.')[1] === ("png" || "jpg" || "jpeg" || "bmp" || "svg" || "tiff" || "webp") ?
-                                                        (<img style={{ width: "35px", height: "35px" }} src={png} alt="image" />) :
-                                                        item.name.split('.')[1] === "mp4" ?
-                                                            (<img style={{ width: "35px", height: "35px" }} src={mp4} alt="image" />) :
-                                                            item.name.split('.')[1] === ("xlsx" || "xls" || "xlsm" || "csv" || "xltm" || "xltx" || "xlsb") ?
-                                                                (<img style={{ width: "35px", height: "35px" }} src={xlsx} alt="image" />) :
-                                                                item.name.split('.')[1] === "docx" ?
-                                                                    (<img style={{ width: "35px", height: "35px" }} src={word} alt="image" />) :
-                                                                    item.name.split('.')[1] === "pdf" ?
-                                                                        (<img style={{ width: "35px", height: "35px" }} src={pdf} alt="image" />) :
-                                                                        item.name.split('.')[1] === "txt" ?
-                                                                            (<img style={{ width: "35px", height: "35px" }} src={txt} alt="image" />) :
-                                                                            item.name.split('.')[1] === ("ppt" || "pptx" || "pps" || "ppsx" || "pot" || "potx" || "pptm" || "ppsm") ?
-                                                                                (<img style={{ width: "35px", height: "35px" }} src={ppt} alt="image" />) :
-                                                                                item.name.split('.')[1] === "vsdx" ?
-                                                                                    (<img style={{ width: "35px", height: "35px" }} src={vsd} alt="image" />) :
-                                                                                    item.name.split('.')[1] === "mp3" ?
-                                                                                        (<img style={{ width: "35px", height: "35px" }} src={mp3} alt="image" />) :
-                                                                                        null
-                                                }
-                                                </th>
-                                                <th>{item.name}</th>
-                                                <th>{item.createdDateTime}</th>
-                                                <th>{item.lastModifiedDateTime}</th>
-                                                <th><div onClick={() => downloadfile(drive['@microsoft.graph.downloadUrl'])}>
-                                                    <img style={{ width: "35px", height: "35px" }} src={download} alt="download" />
-                                                </div></th>
-                                            </tr>)
-                                            :
-                                            (<tr>
-                                                <th><img style={{ width: "35px", height: "35px" }} src={folder} alt='folder' /></th>
-                                                <th>{<button onClick={() => getitems(item)} value={item.id}> {item.name}</button>}</th>
-                                                <th>{item.createdDateTime}</th>
-                                                <th>{item.lastModifiedDateTime}</th>
-                                            </tr>)
-                                    ))}
+                                <button className="button-allsites" onClick={handleGoBack}>Go Back</button>
+                                <table className="styled-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Created At</th>
+                                            <th>Last Modified At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {iteminfo.map((item) => (
+                                            (item['@microsoft.graph.downloadUrl']) ?
+                                                (<tr>
+                                                    <th>{
+                                                        item.name.split('.')[1] === ("png" || "jpg" || "jpeg" || "bmp" || "svg" || "tiff" || "webp") ?
+                                                            (<img style={{ width: "35px", height: "35px" }} src={png} alt="image" />) :
+                                                            item.name.split('.')[1] === "mp4" ?
+                                                                (<img style={{ width: "35px", height: "35px" }} src={mp4} alt="image" />) :
+                                                                item.name.split('.')[1] === ("xlsx" || "xls" || "xlsm" || "csv" || "xltm" || "xltx" || "xlsb") ?
+                                                                    (<img style={{ width: "35px", height: "35px" }} src={xlsx} alt="image" />) :
+                                                                    item.name.split('.')[1] === "docx" ?
+                                                                        (<img style={{ width: "35px", height: "35px" }} src={word} alt="image" />) :
+                                                                        item.name.split('.')[1] === "pdf" ?
+                                                                            (<img style={{ width: "35px", height: "35px" }} src={pdf} alt="image" />) :
+                                                                            item.name.split('.')[1] === "txt" ?
+                                                                                (<img style={{ width: "35px", height: "35px" }} src={txt} alt="image" />) :
+                                                                                item.name.split('.')[1] === ("ppt" || "pptx" || "pps" || "ppsx" || "pot" || "potx" || "pptm" || "ppsm") ?
+                                                                                    (<img style={{ width: "35px", height: "35px" }} src={ppt} alt="image" />) :
+                                                                                    item.name.split('.')[1] === "vsdx" ?
+                                                                                        (<img style={{ width: "35px", height: "35px" }} src={vsd} alt="image" />) :
+                                                                                        item.name.split('.')[1] === "mp3" ?
+                                                                                            (<img style={{ width: "35px", height: "35px" }} src={mp3} alt="image" />) :
+                                                                                            null
+                                                    }
+                                                    </th>
+                                                    <th>{item.name}</th>
+                                                    <th>{item.createdDateTime}</th>
+                                                    <th>{item.lastModifiedDateTime}</th>
+                                                    <th><div onClick={() => downloadfile(drive['@microsoft.graph.downloadUrl'])}>
+                                                        <img style={{ width: "35px", height: "35px" }} src={download} alt="download" />
+                                                    </div></th>
+                                                </tr>)
+                                                :
+                                                (<tr>
+                                                    <th><img style={{ width: "35px", height: "35px" }} src={folder} alt='folder' /></th>
+                                                    <th>{<button className="clickbutton" onClick={() => getitems(item)} value={item.id}> {item.name}</button>}</th>
+                                                    <th>{item.createdDateTime}</th>
+                                                    <th>{item.lastModifiedDateTime}</th>
+                                                </tr>)
+                                        ))}
+                                    </tbody>
                                 </table>
                             </div>
                         )
