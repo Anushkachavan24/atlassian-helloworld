@@ -22,6 +22,8 @@ resolver.define('getCredentials', async (req) => {
 
     const { data } = req.payload
 
+    console.log("Data received:", data);
+    console.log("Hello");
     const gt = await storage.setSecret('application-key', data);
     const example = await storage.getSecret('application-key');
     const credentials = JSON.parse(example)
