@@ -1,4 +1,4 @@
-import ForgeUI, { MacroConfig, TextField } from '@forge/ui';
+import ForgeUI, { MacroConfig, TextField, Box, Blockquote } from '@forge/ui';
 
 export const Config = () => {
   return (

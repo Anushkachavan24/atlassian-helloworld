@@ -1,5 +1,5 @@
 import Resolver from '@forge/resolver';
-import { storage, fetch } from '@forge/api';
+import { storage, fetch, Box, Blockquote } from '@forge/api';
 
 const resolver = new Resolver();
 
