@@ -8,6 +8,8 @@ import Integrate from './components/Integrate';
 import Thirdform from './components/thirdform'
 import Page1 from "./components/page1";
 
+import Page1 from "./components/page1";
+
 function App() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
