@@ -4,7 +4,7 @@ import ForgeUI, {
   MacroConfig,
   Text,
   TextField,
-  useConfig
+  useConfig, Box, Blockquote
 } from "@forge/ui";
 
 const defaultConfig = {

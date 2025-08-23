@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Box, Blockquote } from 'react';
 import { invoke } from '@forge/bridge';
 import Navbar from './components/Navbar';
 import Sidemenu from './components/Sidemenu';
